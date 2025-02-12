@@ -65,7 +65,7 @@
     /* Navigation Bar */
     nav {
       background: #112240;
-      padding: 1rem;
+      padding: 0.5rem 1rem; /* Reduced padding */
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -81,7 +81,7 @@
     }
 
     nav ul li {
-      margin: 0 1rem;
+      margin: 0 0.75rem; /* Reduced margin between items */
       position: relative;
     }
 
@@ -90,7 +90,8 @@
       font-weight: bold;
       transition: all 0.3s ease;
       display: inline-block;
-      padding: 0.5rem 0;
+      padding: 0.3rem 0; /* Reduced padding */
+      font-size: 0.9rem; /* Reduced font size */
     }
 
     /* Cool Hover Animation */
@@ -291,6 +292,16 @@
       h2 {
         font-size: 1.5rem;
       }
+
+      /* Responsive Navigation Bar */
+      nav ul li {
+        margin: 0 0.5rem; /* Further reduce margin on smaller screens */
+      }
+
+      nav ul li a {
+        font-size: 0.8rem; /* Further reduce font size on smaller screens */
+        padding: 0.2rem 0; /* Further reduce padding on smaller screens */
+      }
     }
   </style>
 </head>
@@ -307,6 +318,7 @@
   <nav>
     <ul>
       <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#certifications">Certifications</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -324,6 +336,37 @@
         <li><strong>Web Application Penetration Testing</strong>: Conducted security assessments for [X] web applications.</li>
         <li><strong>Mobile Application Penetration Testing</strong>: Identified vulnerabilities in Android/iOS applications.</li>
         <li><strong>Application Security Engineering</strong>: Implemented secure coding practices and DevSecOps pipelines.</li>
+      </ul>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+      <h2><i class="fas fa-briefcase"></i> Experience</h2>
+      <ul>
+        <li>
+          <strong>Cybersecurity Analyst</strong> - XYZ Company (2022 - Present)
+          <ul>
+            <li>Conducted vulnerability assessments and penetration testing for web and mobile applications.</li>
+            <li>Implemented security measures to protect sensitive data and systems.</li>
+            <li>Collaborated with development teams to integrate security into the CI/CD pipeline.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Security Consultant</strong> - ABC Corporation (2020 - 2022)
+          <ul>
+            <li>Provided security consulting services to clients, including risk assessments and security audits.</li>
+            <li>Developed and delivered security training programs for employees.</li>
+            <li>Assisted in the development of incident response plans and procedures.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Junior Penetration Tester</strong> - DEF Solutions (2018 - 2020)
+          <ul>
+            <li>Performed penetration testing on various applications and infrastructure.</li>
+            <li>Identified and reported security vulnerabilities to clients.</li>
+            <li>Assisted in the development of security policies and procedures.</li>
+          </ul>
+        </li>
       </ul>
     </section>
 
@@ -387,4 +430,4 @@
     });
   </script>
 </body>
-                                                                                                                </html>
+</html>
