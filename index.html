@@ -36,8 +36,9 @@
 
     header h1 {
       margin: 0;
-      font-size: 2.5rem;
+      font-size: 3rem;
       color: #64ffda; /* Teal accent */
+      font-weight: bold;
     }
 
     header p {
@@ -49,16 +50,24 @@
     /* Navigation Bar */
     nav {
       background: #112240;
-      padding: 1rem;
+      padding: 1rem 2rem;
       position: sticky;
       top: 0;
       z-index: 1000;
       border-bottom: 1px solid #233554;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #64ffda;
     }
 
     nav ul {
       display: flex;
-      justify-content: center;
       list-style: none;
       margin: 0;
       padding: 0;
@@ -236,13 +245,26 @@
 
     body.light-mode header {
       background: #ffffff;
-      color: #333;
+      color: #2c3e50; /* Darker text for better contrast */
+    }
+
+    body.light-mode header h1 {
+      color: #2c3e50; /* Darker text for better contrast */
+    }
+
+    body.light-mode header p {
+      color: #555; /* Slightly darker gray for better contrast */
     }
 
     body.light-mode section {
       background: #ffffff;
       color: #333;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    body.light-mode h2 {
+      color: #2c3e50; /* Darker text for better contrast */
+      border-bottom: 2px solid #64ffda; /* Teal accent for consistency */
     }
 
     body.light-mode ul li {
@@ -255,6 +277,19 @@
     }
 
     body.light-mode a:hover {
+      color: #64ffda;
+    }
+
+    body.light-mode footer {
+      background: #ffffff;
+      color: #555; /* Slightly darker gray for better contrast */
+    }
+
+    body.light-mode .social-links a {
+      color: #2c3e50;
+    }
+
+    body.light-mode .social-links a:hover {
       color: #64ffda;
     }
 
@@ -283,28 +318,43 @@
       h2 {
         font-size: 1.5rem;
       }
+
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+      }
+
+      nav ul {
+        margin-top: 1rem;
+      }
+
+      nav ul li {
+        margin: 0.5rem 0;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="logo">John Doe</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
   <!-- Header -->
   <header>
     <div class="hero">
-      <h1>Cybersecurity Portfolio</h1>
+      <h1>CYBER SECURITY EXPERT</h1>
       <p>Hi, I'm [Your Name], a cybersecurity enthusiast specializing in Bug Bounty Hunting, API Security, Mobile & Web Application Penetration Testing, and Application Security Engineering.</p>
       <a href="#contact" class="cta-button">Get in Touch</a>
     </div>
   </header>
-
-  <!-- Navigation Bar -->
-  <nav>
-    <ul>
-      <li><a href="#expertise">Expertise</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#certifications">Certifications</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
 
   <!-- Main Content -->
   <div class="container">
