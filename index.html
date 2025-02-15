@@ -150,6 +150,23 @@
             transform: translateX(5px); /* Subtle slide effect */
         }
 
+        /* Light Mode Side Pane */
+        body.light-mode .side-pane {
+            background: #ffffff; /* Light background for side pane */
+        }
+
+        body.light-mode .side-pane ul li a {
+            color: #2c3e50; /* Dark text color for light mode */
+        }
+
+        body.light-mode .side-pane ul li a:hover {
+            color: #64ffda; /* Teal accent on hover */
+        }
+
+        body.light-mode .side-pane ul li a::after {
+            background: #64ffda; /* Teal accent for underline animation */
+        }
+
         /* Container */
         .container {
             max-width: 1200px;
