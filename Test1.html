@@ -1,465 +1,539 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cybersecurity Portfolio</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    /* General Styles */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      background-color: #0a192f; /* Dark blue background */
-      color: #ccd6f6; /* Light text color */
-      transition: background-color 0.3s, color 0.3s;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #0a192f;
+            color: #ccd6f6;
+            transition: background-color 0.3s, color 0.3s;
+        }
 
-    a {
-      color: #64ffda; /* Teal accent color */
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
+        a {
+            color: #64ffda;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
 
-    a:hover {
-      color: #ffffff; /* White on hover */
-    }
+        a:hover {
+            color: #ffffff;
+        }
 
-    /* Header */
-    header {
-      background: #0a192f;
-      padding: 4rem 1rem; /* Adjusted padding for mobile */
-      text-align: center;
-      border-bottom: 1px solid #233554;
-    }
+        /* Header */
+        header {
+            background: #0a192f;
+            padding: 4rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #233554;
+        }
 
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem; /* Adjusted font size for mobile */
-      color: #64ffda; /* Teal accent */
-    }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #64ffda;
+        }
 
-    header p {
-      margin: 1rem 0 0;
-      font-size: 1rem; /* Adjusted font size for mobile */
-      color: #8892b0; /* Light gray */
-    }
+        header p {
+            margin: 1rem 0 0;
+            font-size: 1rem;
+            color: #8892b0;
+        }
 
-    .cta-button {
-      display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.75rem 1.5rem;
-      background: #64ffda;
-      color: #0a192f;
-      border-radius: 4px;
-      font-weight: bold;
-      transition: background 0.3s ease;
-    }
+        .cta-button {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background: #64ffda;
+            color: #0a192f;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
 
-    .cta-button:hover {
-      background: #52d1b2;
-    }
+        .cta-button:hover {
+            background: #52d1b2;
+        }
 
-    /* Navigation Bar */
-    nav {
-      background: #112240;
-      padding: 1rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid #233554;
-    }
+        /* Navigation Bar (Hidden) */
+        nav {
+            display: none; /* Initially hide the original nav */
+        }
 
-    nav ul {
-      display: flex;
-      justify-content: center;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      flex-wrap: wrap; /* Allow wrapping for mobile */
-    }
+        /* Hamburger Menu Button */
+        .hamburger-menu {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            background: #64ffda;
+            color: #0a192f;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            z-index: 1001;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
 
-    nav ul li {
-      margin: 0.5rem; /* Adjusted margin for mobile */
-    }
+        .hamburger-menu:hover {
+            background: #52d1b2;
+            transform: translateY(-3px);
+        }
 
-    nav ul li a {
-      color: #64ffda;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      display: inline-block;
-      padding: 0.5rem 0;
-    }
+        /* Side Pane */
+        .side-pane {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background: #112240;
+            padding: 2rem;
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
 
-    /* Cool Hover Animation */
-    nav ul li a::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      background: #64ffda;
-      bottom: 0;
-      left: 0;
-      transform: scaleX(0);
-      transform-origin: bottom right;
-      transition: transform 0.3s ease;
-    }
+        .side-pane.open {
+            transform: translateX(0);
+        }
 
-    nav ul li a:hover::after {
-      transform: scaleX(1);
-      transform-origin: bottom left;
-    }
+        .side-pane ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
 
-    nav ul li a:hover {
-      color: #ffffff;
-      transform: translateY(-3px); /* Slide up effect */
-    }
+        .side-pane ul li {
+            margin: 1rem 0;
+        }
 
-    /* Container */
-    .container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
+        .side-pane ul li a {
+            color: #64ffda;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 0.5rem 0;
+            position: relative;
+        }
 
-    /* Sections */
-    section {
-      background: #112240; /* Darker blue for sections */
-      margin: 1.5rem 0;
-      padding: 1.5rem; /* Adjusted padding for mobile */
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+        /* Side Pane Link Animation */
+        .side-pane ul li a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #64ffda;
+            bottom: -2px;
+            left: 0;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+        }
 
-    section:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    }
+        .side-pane ul li a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
 
-    h2 {
-      color: #64ffda; /* Teal accent */
-      font-size: 1.5rem; /* Adjusted font size for mobile */
-      margin-bottom: 1.5rem;
-      border-bottom: 2px solid #233554;
-      padding-bottom: 0.5rem;
-    }
+        .side-pane ul li a:hover {
+            color: #ffffff;
+            transform: translateX(5px); /* Subtle slide effect */
+        }
 
-    h2 i {
-      margin-right: 0.5rem;
-    }
+        /* Light Mode Side Pane */
+        body.light-mode .side-pane {
+            background: #ffffff; /* Light background for side pane */
+        }
 
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
+        body.light-mode .side-pane ul li a {
+            color: #2c3e50; /* Dark text color for light mode */
+        }
 
-    ul li {
-      background: #233554; /* Dark blue for list items */
-      margin: 0.75rem 0;
-      padding: 1rem;
-      border-radius: 4px;
-      transition: background 0.3s ease;
-    }
+        body.light-mode .side-pane ul li a:hover {
+            color: #64ffda; /* Teal accent on hover */
+        }
 
-    ul li:hover {
-      background: #1b2a41; /* Slightly lighter blue on hover */
-    }
+        body.light-mode .side-pane ul li a::after {
+            background: #64ffda; /* Teal accent for underline animation */
+        }
 
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 2rem 0;
-      background: #0a192f;
-      color: #8892b0;
-      border-top: 1px solid #233554;
-      margin-top: 3rem;
-    }
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
 
-    .social-links {
-      margin-bottom: 1rem;
-    }
+        /* Sections */
+        section {
+            background-color: #112240;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0.2rem 0.4rem 0.6rem rgba(0, 0, 0, 0.1);
+            transition: 0.3s ease-in-out;
+            border-radius: 0.5rem;
+        }
 
-    .social-links a {
-      margin: 0 0.5rem;
-      font-size: 1.5rem;
-      color: #64ffda;
-      transition: color 0.3s ease;
-    }
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0.4rem 0.8rem 0.9rem rgba(0, 0, 0, 0.2);
+        }
 
-    .social-links a:hover {
-      color: #ffffff;
-    }
+        h2 {
+            color: #64ffda;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #233554;
+            padding-bottom: 0.5rem;
+        }
 
-    /* Floating Contact Button */
-    .floating-contact-button {
-      position: fixed;
-      bottom: 1rem;
-      right: 1rem;
-      background: #64ffda;
-      color: #0a192f;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 4px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: background 0.3s ease, transform 0.3s ease;
-      z-index: 1000;
-    }
+        h2 i {
+            margin-right: 0.5rem;
+        }
 
-    .floating-contact-button:hover {
-      background: #52d1b2;
-      transform: translateY(-3px);
-    }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
 
-    /* Theme Toggle Button */
-    .theme-toggle {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: #64ffda;
-      border: none;
-      padding: 0.5rem;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      z-index: 1000;
-    }
+        ul li {
+            background: #233554;
+            margin: 0.75rem;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            transition: 0.3s ease;
+        }
 
-    .theme-toggle:hover {
-      background: #52d1b2;
-    }
+        ul li:hover {
+            background: #1b2a41;
+        }
 
-    /* Light Mode */
-    body.light-mode {
-      background-color: #f4f4f4;
-      color: #333;
-    }
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #0a192f;
+            color: #8892b0;
+            border-top: 1px solid #233554;
+            margin-top: 3rem;
+        }
 
-    body.light-mode header {
-      background: #ffffff;
-      color: #2c3e50; /* Darker text for better contrast */
-    }
+        .social-links {
+            margin-bottom: 1rem;
+        }
 
-    body.light-mode header h1 {
-      color: #2c3e50; /* Darker text for better contrast */
-    }
+        .social-links a {
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            color: #64ffda;
+            transition: 0.3s ease;
+        }
 
-    body.light-mode header p {
-      color: #555; /* Slightly darker gray for better contrast */
-    }
+        .social-links a:hover {
+            color: #ffffff;
+        }
 
-    body.light-mode section {
-      background: #ffffff;
-      color: #333;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+        /* Floating Contact Button */
+        .floating-contact-button {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            background: #64ffda;
+            color: #0a192f;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 0.25rem;
+            font-weight: bold;
+            box-shadow: 0.2rem 0.4rem 0.6rem rgba(0, 0, 0, 0.1);
+            transition: 0.3s ease, transform 0.3s ease;
+            z-index: 10000;
+        }
 
-    body.light-mode h2 {
-      color: #2c3e50; /* Darker text for better contrast */
-      border-bottom: 2px solid #64ffda; /* Teal accent for consistency */
-    }
+        .floating-contact-button:hover {
+            background: #52d1b2;
+            transform: translateY(-3px);
+        }
 
-    body.light-mode ul li {
-      background: #f4f4f4;
-      color: #333;
-    }
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: #64ffda;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s ease;
+            z-index: 10000;
+        }
 
-    body.light-mode a {
-      color: #2c3e50;
-    }
+        .theme-toggle:hover {
+            background: #52d1b2;
+        }
 
-    body.light-mode a:hover {
-      color: #64ffda;
-    }
+        /* Light Mode */
+        body.light-mode {
+            background-color: #f4f4f4;
+            color: #333;
+        }
 
-    body.light-mode footer {
-      background: #ffffff;
-      color: #555; /* Slightly darker gray for better contrast */
-    }
+        body.light-mode header {
+            background: #ffffff;
+            color: #2c3e50;
+        }
 
-    body.light-mode .social-links a {
-      color: #2c3e50;
-    }
+        body.light-mode header h1 {
+            color: #2c3e50;
+        }
 
-    body.light-mode .social-links a:hover {
-      color: #64ffda;
-    }
+        body.light-mode header p {
+            color: #555;
+        }
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      header {
-        padding: 3rem 1rem;
-      }
+        body.light-mode section {
+            background: #ffffff;
+            color: #333;
+            box-shadow: 0.2rem 0.4rem 0.6rem rgba(0, 0, 0, 0.1);
+        }
 
-      header h1 {
-        font-size: 2rem;
-      }
+        body.light-mode h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #64ffda;
+        }
 
-      header p {
-        font-size: 0.9rem;
-      }
+        body.light-mode ul li {
+            background: #f4f4f4;
+            color: #333;
+        }
 
-      .container {
-        padding: 0 1rem;
-      }
+        body.light-mode a {
+            color: #2c3e50;
+        }
 
-      section {
-        padding: 1rem;
-      }
+        body.light-mode a:hover {
+            color: #64ffda;
+        }
 
-      h2 {
-        font-size: 1.3rem;
-      }
+        body.light-mode footer {
+            background: #ffffff;
+            color: #555;
+        }
 
-      .floating-contact-button {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-      }
-    }
-  </style>
+        body.light-mode .social-links a {
+            color: #2c3e50;
+        }
+
+        body.light-mode .social-links a:hover {
+            color: #64ffda;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 0.5rem;
+            }
+
+            section {
+                padding: 0.75rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            .floating-contact-button {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+
+            .hamburger-menu {
+                top: 0.5rem;
+                left: 0.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <h1>CSUME JAKSON</h1>
-    <p>CYBER SECURITY EXPERT</p>
-    <p>Hi, I'm [Your Name], a cybersecurity enthusiast specializing in Bug Bounty Hunting, API Security, Mobile & Web Application Penetration Testing, and Application Security Engineering.</p>
-    <a href="#expertise" class="cta-button">Get Started</a>
-  </header>
+    <!-- Header -->
+    <header>
+        <h1>SAMUEL SHONDE</h1>
+        <p>CYBER SECURITY EXPERT</p>
+        <p>Hi, I'm Samuel Shonde, a Passionate Cybersecurity Professional specializing in Bug Bounty Hunting, API Security, Mobile & Web Application Penetration Testing, and Application Security Engineering.</p>
+        <a href="#expertise" class="cta-button">Get Started</a>
+    </header>
 
-  <!-- Navigation Bar -->
-  <nav>
-    <ul>
-      <li><a href="#about">About Me</a></li>
-      <li><a href="#expertise">Expertise</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#certifications">Certifications</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+    <!-- Navigation Bar (Hidden) -->
+    <nav>
+        <ul>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-  <!-- Main Content -->
-  <div class="container">
-    <!-- About Me -->
-    <section id="about">
-      <h2><i class="fas fa-user"></i> About Me</h2>
-      <p>
-        I am a passionate cybersecurity professional with [X] years of experience in securing digital assets and protecting organizations from cyber threats. My journey in cybersecurity began with a deep curiosity about how systems work and how they can be exploited, which eventually led me to specialize in ethical hacking and application security.
-      </p>
-      <p>
-        I thrive in challenging environments where I can apply my skills to identify vulnerabilities, design secure systems, and educate teams on best practices. Outside of work, I enjoy contributing to the cybersecurity community through blogs, open-source projects, and mentoring aspiring security enthusiasts.
-      </p>
-      <p>
-        My mission is to make the digital world a safer place by staying ahead of emerging threats and continuously improving my skills.
-      </p>
-    </section>
+    <!-- Hamburger Menu Button -->
+    <button class="hamburger-menu" onclick="toggleSidePane()">
+        <i class="fas fa-bars"></i>
+    </button>
 
-    <!-- Areas of Expertise -->
-    <section id="expertise">
-      <h2><i class="fas fa-laptop-code"></i> Areas of Expertise</h2>
-      <ul>
-        <li><strong>Bug Bounty Hunting</strong>: Discovered and reported vulnerabilities in [X] programs, including [specific examples].</li>
-        <li><strong>API Security</strong>: Developed tools and techniques to secure APIs against common vulnerabilities.</li>
-        <li><strong>Web Application Penetration Testing</strong>: Conducted security assessments for [X] web applications.</li>
-        <li><strong>Mobile Application Penetration Testing</strong>: Identified vulnerabilities in Android/iOS applications.</li>
-        <li><strong>Application Security Engineering</strong>: Implemented secure coding practices and DevSecOps pipelines.</li>
-      </ul>
-    </section>
-
-    <!-- Experience -->
-    <section id="experience">
-      <h2><i class="fas fa-briefcase"></i> Experience</h2>
-      <ul>
-        <li>
-          <strong>Cybersecurity Analyst</strong> - [Company Name], [Location]<br>
-          <em>[Start Date] - [End Date]</em><br>
-          - Conducted vulnerability assessments and penetration testing for web and mobile applications.<br>
-          - Developed and implemented security policies and procedures.<br>
-          - Collaborated with development teams to integrate security into the SDLC.
-        </li>
-        <li>
-          <strong>Bug Bounty Hunter</strong> - [Platform Name]<br>
-          <em>[Start Date] - [End Date]</em><br>
-          - Discovered and reported critical vulnerabilities in high-profile programs.<br>
-          - Ranked in the top [X]% of hunters on [Platform Name].
-        </li>
-        <li>
-          <strong>Security Consultant</strong> - [Freelance/Company Name]<br>
-          <em>[Start Date] - [End Date]</em><br>
-          - Provided security consulting services to clients across various industries.<br>
-          - Conducted security audits and risk assessments.
-        </li>
-      </ul>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects">
-      <h2><i class="fas fa-project-diagram"></i> Projects</h2>
-      <ul>
-        <li><strong>Bug Bounty</strong>: <a href="#">Vulnerability in XYZ Program</a></li>
-        <li><strong>API Security</strong>: <a href="#">API Security Scanner</a></li>
-        <li><strong>Web Application Penetration Testing</strong>: <a href="#">SQL Injection in XYZ Web App</a></li>
-        <li><strong>Mobile Application Penetration Testing</strong>: <a href="#">Insecure Data Storage in ABC App</a></li>
-        <li><strong>Application Security Engineering</strong>: <a href="#">Implementing SAST in CI/CD Pipeline</a></li>
-      </ul>
-    </section>
-
-    <!-- Certifications -->
-    <section id="certifications">
-      <h2><i class="fas fa-certificate"></i> Certifications</h2>
-      <ul>
-        <li><strong>Certified Ethical Hacker (CEH)</strong>: <a href="#">View Certificate</a></li>
-        <li><strong>Offensive Security Certified Professional (OSCP)</strong>: <a href="#">View Certificate</a></li>
-        <li><strong>API Security Certification</strong>: <a href="#">View Certificate</a></li>
-      </ul>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact">
-      <h2><i class="fas fa-envelope"></i> Contact</h2>
-      <p>Feel free to reach out to me for collaborations, bug bounty programs, or security consultations:</p>
-      <ul>
-        <li><strong>Email</strong>: <a href="mailto:your.email@example.com">your.email@example.com</a></li>
-        <li><strong>LinkedIn</strong>: <a href="https://linkedin.com/in/yourprofile" target="_blank">Your LinkedIn Profile</a></li>
-        <li><strong>Twitter</strong>: <a href="https://twitter.com/YourHandle" target="_blank">@YourHandle</a></li>
-      </ul>
-    </section>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <div class="social-links">
-      <a href="https://github.com/yourprofile" target="_blank"><i class="fab fa-github"></i></a>
-      <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin"></i></a>
-      <a href="https://twitter.com/yourhandle" target="_blank"><i class="fab fa-twitter"></i></a>
+    <!-- Side Pane -->
+    <div class="side-pane" id="sidePane">
+        <ul>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </div>
-    <p>&copy; 2025 CSUME JAKSON. All rights reserved.</p>
-  </footer>
 
-  <!-- Floating Contact Button -->
-  <button class="floating-contact-button" onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });">
-    Contact Me
-  </button>
+    <!-- Main Content -->
+    <div class="container">
+        <!-- About Me -->
+        <section id="about">
+            <h2><i class="fas fa-user"></i> About Me</h2>
+            <p>I am a passionate cybersecurity professional with [X] years of experience in securing digital assets and protecting organizations from cyber threats. My journey in cybersecurity began with a deep curiosity about how systems work and how they can be exploited, which eventually led me to specialize in ethical hacking and application security.</p>
+            <p>I thrive in challenging environments where I can apply my skills to identify vulnerabilities, design secure systems, and educate teams on best practices. Outside of work, I enjoy contributing to the cybersecurity community through blogs, open-source projects, and mentoring aspiring security enthusiasts.</p>
+            <p>My mission is to make the digital world a safer place by staying ahead of emerging threats and continuously improving my skills.</p>
+        </section>
 
-  <!-- Theme Toggle Button -->
-  <button id="theme-toggle" class="theme-toggle">
-    <i class="fas fa-moon"></i>
-  </button>
+        <!-- Areas of Expertise -->
+        <section id="expertise">
+            <h2><i class="fas fa-laptop-code"></i> Areas of Expertise</h2>
+            <ul>
+                <li><strong>Bug Bounty Hunting</strong>: Discovered and reported vulnerabilities in [X] programs, including [specific examples].</li>
+                <li><strong>API Security</strong>: Developed tools and techniques to secure APIs against common vulnerabilities.</li>
+                <li><strong>Web Application Penetration Testing</strong>: Conducted security assessments for [X] web applications.</li>
+                <li><strong>Mobile Application Penetration Testing</strong>: Identified vulnerabilities in Android/iOS applications.</li>
+                <li><strong>Application Security Engineering</strong>: Implemented secure coding practices and DevSecOps pipelines.</li>
+            </ul>
+        </section>
 
-  <!-- JavaScript for Theme Toggle -->
-  <script>
-    const themeToggle = document.getElementById('theme-toggle');
-    const body = document.body;
+        <!-- Experience -->
+        <section id="experience">
+            <h2><i class="fas fa-briefcase"></i> Experience</h2>
+            <ul>
+                <li>
+                    <strong>Cybersecurity Analyst</strong> - [Company Name], [Location]<br>
+                    <em>[Start Date] - [End Date]</em><br>
+                    - Conducted vulnerability assessments and penetration testing for web and mobile applications.<br>
+                    - Developed and implemented security policies and procedures.<br>
+                    - Collaborated with development teams to integrate security into the SDLC.
+                </li>
+                <li>
+                    <strong>Bug Bounty Hunter</strong> - [Platform Name]<br>
+                    <em>[Start Date] - [End Date]</em><br>
+                    - Discovered and reported critical vulnerabilities in high-profile programs.<br>
+                    - Ranked in the top [X]% of hunters on [Platform Name].
+                </li>
+                <li>
+                    <strong>Security Consultant</strong> - [Freelance/Company Name]<br>
+                    <em>[Start Date] - [End Date]</em><br>
+                    - Provided security consulting services to clients across various industries.<br>
+                    - Conducted security audits and risk assessments.
+                </li>
+            </ul>
+        </section>
 
-    themeToggle.addEventListener('click', () => {
-      body.classList.toggle('light-mode');
-      themeToggle.innerHTML = body.classList.contains('light-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-    });
-  </script>
+        <!-- Projects -->
+        <section id="projects">
+            <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+            <ul>
+                <li><strong>Bug Bounty</strong>: <a href="#">Vulnerability in XYZ Program</a></li>
+                <li><strong>API Security</strong>: <a href="#">API Security Scanner</a></li>
+                <li><strong>Web Application Penetration Testing</strong>: <a href="#">SQL Injection in XYZ Web App</a></li>
+                <li><strong>Mobile Application Penetration Testing</strong>: <a href="#">Insecure Data Storage in ABC App</a></li>
+                <li><strong>Application Security Engineering</strong>: <a href="#">Implementing SAST in CI/CD Pipeline</a></li>
+            </ul>
+        </section>
+
+        <!-- Certifications -->
+        <section id="certifications">
+            <h2><i class="fas fa-certificate"></i> Certifications</h2>
+            <ul>
+                <li><strong>Certified Ethical Hacker (CEH)</strong>: <a href="#">View Certificate</a></li>
+                <li><strong>Offensive Security Certified Professional (OSCP)</strong>: <a href="#">View Certificate</a></li>
+                <li><strong>API Security Certification</strong>: <a href="#">View Certificate</a></li>
+            </ul>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact">
+            <h2><i class="fas fa-envelope"></i> Contact</h2>
+            <p>Feel free to reach out to me for collaborations, bug bounty programs, or security consultations:</p>
+            <ul>
+                <li><strong>Email:</strong> <a href="mailto:yours.email@example.com">your.email@example.com</a></li>
+                <li><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/yourprofile" target="_blank">Your LinkedIn Profile</a></li>
+                <li><strong>Twitter:</strong> <a href="https://twitter.com/yourhandle" target="_blank">@YourHandle</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/yourprofile" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://twitter.com/yourhandle" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://youtube.com/youryoutubechannel" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>&copy; 2025 CSUME JAKSON. All rights reserved.</p>
+    </footer>
+
+    <!-- Floating Contact Button -->
+    <button class="floating-contact-button" onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });">
+        Contact Me
+    </button>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- JavaScript for Theme Toggle and Side Pane -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const sidePane = document.getElementById('sidePane');
+
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('light-mode');
+                themeToggle.innerHTML = body.classList.contains('light-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            });
+
+            window.toggleSidePane = function() {
+                sidePane.classList.toggle('open');
+            };
+        });
+    </script>
 </body>
 </html>
