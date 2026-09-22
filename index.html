@@ -3,540 +3,1369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cybersecurity Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Samuel Shonde - Application Security Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* General Styles */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
-            background-color: #0a192f;
-            color: #ccd6f6;
-            transition: background-color 0.3s, color 0.3s;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #09090b;
+            --bg-elevated: #18181b;
+            --bg-subtle: #1c1c20;
+            --border: #27272a;
+            --border-subtle: #1f1f23;
+            --text: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --accent: #e4e4e7;
+            --accent-hover: #ffffff;
+            --accent-gold: #d4a853;
+            --accent-gold-dim: rgba(212, 168, 83, 0.12);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--accent-gold);
+            color: var(--bg);
         }
 
         a {
-            color: #64ffda;
+            color: inherit;
             text-decoration: none;
-            transition: color 0.3s ease;
         }
 
-        a:hover {
-            color: #ffffff;
-        }
-
-        /* Header */
-        header {
-            background: #0a192f;
-            padding: 4rem 1rem;
-            text-align: center;
-            border-bottom: 1px solid #233554;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            color: #64ffda;
-        }
-
-        header p {
-            margin: 1rem 0 0;
-            font-size: 1rem;
-            color: #8892b0;
-        }
-
-        .cta-button {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 0.75rem 1.5rem;
-            background: #64ffda;
-            color: #0a192f;
-            border-radius: 4px;
-            font-weight: bold;
-            transition: background 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background: #52d1b2;
-        }
-
-        /* Navigation Bar (Hidden) */
+        /* ── Navigation ── */
         nav {
-            display: none; /* Initially hide the original nav */
-        }
-
-        /* Hamburger Menu Button */
-        .hamburger-menu {
-            position: fixed;
-            top: 1rem;
-            left: 1rem;
-            background: #64ffda;
-            color: #0a192f;
-            border: none;
-            padding: 0.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            z-index: 1001;
-            transition: background 0.3s ease, transform 0.3s ease;
-        }
-
-        .hamburger-menu:hover {
-            background: #52d1b2;
-            transform: translateY(-3px);
-        }
-
-        /* Side Pane */
-        .side-pane {
             position: fixed;
             top: 0;
             left: 0;
-            width: 250px;
-            height: 100%;
-            background: #112240;
-            padding: 2rem;
-            z-index: 1000;
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-            overflow-y: auto;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            right: 0;
+            z-index: 100;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(9, 9, 11, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border-subtle);
+            transition: var(--transition);
         }
 
-        .side-pane.open {
-            transform: translateX(0);
+        nav.scrolled {
+            padding: 0.85rem 2rem;
+            background: rgba(9, 9, 11, 0.92);
         }
 
-        .side-pane ul {
+        .nav-logo {
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        .nav-logo span {
+            color: var(--accent-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
             list-style: none;
-            padding: 0;
-            margin: 0;
         }
 
-        .side-pane ul li {
-            margin: 1rem 0;
-        }
-
-        .side-pane ul li a {
-            color: #64ffda;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            display: block;
-            padding: 0.5rem 0;
+        .nav-links a {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            transition: var(--transition);
             position: relative;
         }
 
-        /* Side Pane Link Animation */
-        .side-pane ul li a::after {
+        .nav-links a::after {
             content: '';
             position: absolute;
-            width: 100%;
-            height: 2px;
-            background: #64ffda;
-            bottom: -2px;
+            bottom: -4px;
             left: 0;
-            transform: scaleX(0);
-            transform-origin: bottom right;
-            transition: transform 0.3s ease;
+            width: 0;
+            height: 1px;
+            background: var(--accent-gold);
+            transition: var(--transition);
         }
 
-        .side-pane ul li a:hover::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
+        .nav-links a:hover {
+            color: var(--text);
         }
 
-        .side-pane ul li a:hover {
-            color: #ffffff;
-            transform: translateX(5px); /* Subtle slide effect */
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
-        /* Light Mode Side Pane */
-        body.light-mode .side-pane {
-            background: #ffffff; /* Light background for side pane */
-        }
-
-        body.light-mode .side-pane ul li a {
-            color: #2c3e50; /* Dark text color for light mode */
-        }
-
-        body.light-mode .side-pane ul li a:hover {
-            color: #64ffda; /* Teal accent on hover */
-        }
-
-        body.light-mode .side-pane ul li a::after {
-            background: #64ffda; /* Teal accent for underline animation */
-        }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        /* Sections */
-        section {
-            background-color: #112240;
-            margin-top: 0.5rem;
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
             padding: 0.5rem;
-            border-radius: 0.5rem;
-            box-shadow: 0.2rem 0.4rem 0.6rem rgba(0, 0, 0, 0.1);
-            transition: 0.3s ease-in-out;
-            border-radius: 0.5rem;
+            color: var(--text);
+            font-size: 1.1rem;
         }
 
-        section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0.4rem 0.8rem 0.9rem rgba(0, 0, 0, 0.2);
+        /* ── Hero ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
         }
 
-        h2 {
-            color: #64ffda;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid #233554;
-            padding-bottom: 0.5rem;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212, 168, 83, 0.06) 0%, transparent 70%);
+            pointer-events: none;
         }
 
-        h2 i {
-            margin-right: 0.5rem;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        ul li {
-            background: #233554;
-            margin: 0.75rem;
-            padding: 1rem;
-            border-radius: 0.25rem;
-            transition: 0.3s ease;
-        }
-
-        ul li:hover {
-            background: #1b2a41;
-        }
-
-        /* Footer */
-        footer {
+        .hero-content {
             text-align: center;
-            padding: 2rem;
-            background: #0a192f;
-            color: #8892b0;
-            border-top: 1px solid #233554;
-            margin-top: 3rem;
+            max-width: 720px;
+            position: relative;
+            z-index: 1;
         }
 
-        .social-links {
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            background: var(--bg-elevated);
+        }
+
+        .hero-badge .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.08;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h1 .accent {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #f0d78c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.75rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            font-family: var(--font);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: 0.01em;
+        }
+
+        .btn-primary {
+            background: var(--accent-gold);
+            color: var(--bg);
+            border-color: var(--accent-gold);
+        }
+
+        .btn-primary:hover {
+            background: #e0b862;
+            border-color: #e0b862;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-secondary);
+        }
+
+        .btn-secondary:hover {
+            color: var(--text);
+            border-color: var(--text-muted);
+        }
+
+        /* ── Section Styles ── */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 3.5rem;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            color: var(--text);
+        }
+
+        .section-divider {
+            width: 40px;
+            height: 1px;
+            background: var(--accent-gold);
+            margin-top: 1.25rem;
+            opacity: 0.6;
+        }
+
+        /* ── About ── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.8;
+        }
+
+        .about-text p:first-child::first-letter {
+            font-size: 3rem;
+            font-weight: 700;
+            float: left;
+            margin-right: 0.5rem;
+            margin-top: 0.1rem;
+            color: var(--accent-gold);
+            line-height: 1;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            padding: 1.5rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent-gold-dim);
+            background: var(--bg-subtle);
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--accent-gold);
+            line-height: 1;
+            margin-bottom: 0.35rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        /* ── Expertise ── */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .expertise-card {
+            padding: 1.75rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .expertise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .expertise-card:hover {
+            border-color: var(--border);
+            transform: translateY(-2px);
+        }
+
+        .expertise-card:hover::before {
+            opacity: 0.5;
+        }
+
+        .expertise-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            background: var(--accent-gold-dim);
+            color: var(--accent-gold);
+            font-size: 0.95rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .expertise-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .expertise-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        /* ── Experience ── */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2rem;
+            top: 0.35rem;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 2px solid var(--accent-gold);
+            transform: translateX(-50%);
+            margin-left: -0.5px;
+        }
+
+        .timeline-date {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--accent-gold);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-mono);
+        }
+
+        .timeline-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.2rem;
+            letter-spacing: -0.01em;
+        }
+
+        .timeline-company {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .timeline-desc li {
+            list-style: none;
+            position: relative;
+            padding-left: 1rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .timeline-desc li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6em;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--text-muted);
+        }
+
+        /* ── Projects ── */
+        .projects-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            padding: 2rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            transition: var(--transition);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .project-card:hover {
+            border-color: var(--border);
+            transform: translateY(-2px);
+        }
+
+        .project-card.featured {
+            border-color: rgba(212, 168, 83, 0.2);
+            background: linear-gradient(135deg, var(--bg-elevated) 0%, rgba(212, 168, 83, 0.03) 100%);
+        }
+
+        .project-card.featured:hover {
+            border-color: rgba(212, 168, 83, 0.35);
+        }
+
+        .project-tag {
+            display: inline-flex;
+            padding: 0.2rem 0.65rem;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border-radius: 100px;
+            margin-bottom: 0.75rem;
+            background: var(--accent-gold-dim);
+            color: var(--accent-gold);
+        }
+
+        .project-tag.tool {
+            background: rgba(99, 102, 241, 0.12);
+            color: #818cf8;
+        }
+
+        .project-tag.research {
+            background: rgba(34, 197, 94, 0.12);
+            color: #4ade80;
+        }
+
+        .project-tag.api {
+            background: rgba(236, 72, 153, 0.12);
+            color: #f472b6;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
             margin-bottom: 1rem;
         }
 
-        .social-links a {
-            margin: 0 0.5rem;
-            font-size: 1.5rem;
-            color: #64ffda;
-            transition: 0.3s ease;
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
-        .social-links a:hover {
-            color: #ffffff;
+        .project-tech span {
+            font-size: 0.7rem;
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            padding: 0.2rem 0.6rem;
+            background: var(--bg-subtle);
+            border-radius: 100px;
+            border: 1px solid var(--border-subtle);
         }
 
-        /* Floating Contact Button */
-        .floating-contact-button {
-            position: fixed;
-            bottom: 1rem;
-            right: 1rem;
-            background: #64ffda;
-            color: #0a192f;
-            border: none;
-            padding: 0.75rem;
-            border-radius: 0.25rem;
-            font-weight: bold;
-            box-shadow: 0.2rem 0.4rem 0.6rem rgba(0, 0, 0, 0.1);
-            transition: 0.3s ease, transform 0.3s ease;
-            z-index: 10000;
+        .project-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            min-width: fit-content;
         }
 
-        .floating-contact-button:hover {
-            background: #52d1b2;
-            transform: translateY(-3px);
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            white-space: nowrap;
         }
 
-        /* Theme Toggle Button */
-        .theme-toggle {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            background: #64ffda;
-            border: none;
-            padding: 0.5rem;
+        .project-link:hover {
+            color: var(--accent-gold);
+        }
+
+        .project-link i {
+            font-size: 0.75rem;
+        }
+
+        /* ── Certifications ── */
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .cert-card {
+            padding: 1.5rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cert-card:hover {
+            border-color: var(--border);
+        }
+
+        .cert-icon {
+            width: 44px;
+            height: 44px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            background: var(--accent-gold-dim);
+            color: var(--accent-gold);
+            font-size: 1rem;
+        }
+
+        .cert-info h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: -0.01em;
+            margin-bottom: 0.2rem;
+        }
+
+        .cert-info a {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .cert-info a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* ── Contact ── */
+        .contact-content {
+            max-width: 560px;
+        }
+
+        .contact-content p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            transition: var(--transition);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent-gold);
+            color: var(--text);
+            transform: translateX(4px);
+        }
+
+        .contact-link i {
+            width: 20px;
+            text-align: center;
+            color: var(--accent-gold);
+            font-size: 1rem;
+        }
+
+        /* ── Footer ── */
+        footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-socials a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border-radius: 50%;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-socials a:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            transform: translateY(-2px);
+        }
+
+        .footer-copy {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            letter-spacing: 0.02em;
+        }
+
+        /* ── Mobile Nav Overlay ── */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 99;
+            background: rgba(9, 9, 11, 0.96);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .mobile-nav.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-nav a {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: -0.02em;
+            transition: var(--transition);
+        }
+
+        .mobile-nav a:hover {
+            color: var(--accent-gold);
+        }
+
+        .mobile-nav-close {
+            position: absolute;
+            top: 1.25rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.25rem;
             cursor: pointer;
-            transition: 0.3s ease;
-            z-index: 10000;
         }
 
-        .theme-toggle:hover {
-            background: #52d1b2;
+        /* ── Animations ── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        /* Light Mode */
-        body.light-mode {
-            background-color: #f4f4f4;
-            color: #333;
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        body.light-mode header {
-            background: #ffffff;
-            color: #2c3e50;
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .project-card {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+
+            .project-links {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
         }
 
-        body.light-mode header h1 {
-            color: #2c3e50;
-        }
-
-        body.light-mode header p {
-            color: #555;
-        }
-
-        body.light-mode section {
-            background: #ffffff;
-            color: #333;
-            box-shadow: 0.2rem 0.4rem 0.6rem rgba(0, 0, 0, 0.1);
-        }
-
-        body.light-mode h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #64ffda;
-        }
-
-        body.light-mode ul li {
-            background: #f4f4f4;
-            color: #333;
-        }
-
-        body.light-mode a {
-            color: #2c3e50;
-        }
-
-        body.light-mode a:hover {
-            color: #64ffda;
-        }
-
-        body.light-mode footer {
-            background: #ffffff;
-            color: #555;
-        }
-
-        body.light-mode .social-links a {
-            color: #2c3e50;
-        }
-
-        body.light-mode .social-links a:hover {
-            color: #64ffda;
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
-            header {
-                padding: 3rem;
+            nav {
+                padding: 1rem 1.25rem;
             }
 
-            header h1 {
-                font-size: 2rem;
+            .nav-links {
+                display: none;
             }
 
-            header p {
-                font-size: 0.9rem;
+            .hamburger {
+                display: block;
             }
 
-            .container {
-                padding: 0.5rem;
+            .mobile-nav {
+                display: flex;
             }
 
-            section {
-                padding: 0.75rem;
+            .hero {
+                padding: 7rem 1.5rem 3rem;
             }
 
-            h2 {
-                font-size: 1.3rem;
+            .hero h1 {
+                font-size: 2.4rem;
             }
 
-            .floating-contact-button {
-                padding: 0.5rem;
-                font-size: 0.9rem;
+            .hero-subtitle {
+                font-size: 1rem;
             }
 
-            .hamburger-menu {
-                top: 0.5rem;
-                left: 0.5rem;
+            .section {
+                padding: 4rem 1.5rem;
+            }
+
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .certs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <h1>SAMUEL SHONDE</h1>
-        <p>CYBER SECURITY RESEARCHER</p>
-        <p>Hi, I'm Samuel Shonde, a Cybersecurity Researcher specializing in Application Security Engineering, Security Research, API, Mobile & Web Application Penetration Testing.</p>
-        <a href="#expertise" class="cta-button">Get Started</a>
-    </header>
 
-    <!-- Navigation Bar (Hidden) -->
-    <nav>
-        <ul>
-            <li><a href="#about">About Me</a></li>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="nav-logo">samuel<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
             <li><a href="#expertise">Expertise</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#certifications">Certifications</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+            <i class="fas fa-bars"></i>
+        </button>
     </nav>
 
-    <!-- Hamburger Menu Button -->
-    <button class="hamburger-menu" onclick="toggleSidePane()">
-        <i class="fas fa-bars"></i>
-    </button>
-
-    <!-- Side Pane -->
-    <div class="side-pane" id="sidePane">
-        <ul>
-            <li><a href="#about">About Me</a></li>
-            <li><a href="#expertise">Expertise</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#certifications">Certifications</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#about">About</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#contact">Contact</a>
     </div>
 
-    <!-- Main Content -->
-    <div class="container">
-        <!-- About Me -->
-        <section id="about">
-            <h2><i class="fas fa-user"></i> About Me</h2>
-            <p>I am a passionate cybersecurity professional with 4 years of experience in securing digital assets and protecting organizations from cyber threats. My journey in cybersecurity began with a deep curiosity about how systems work and how they can be exploited, which eventually led me to specialize in ethical hacking and application security.</p>
-            <p>I thrive in challenging environments where I can apply my skills to identify vulnerabilities, design secure systems, and educate teams on best practices and strengthening security through ethical hacking, vulnerability assessments, and secure development practices. Outside of work, I enjoy contributing to the cybersecurity community through blogs, open-source projects, and mentoring aspiring security enthusiasts.</p>
-            <p>My mission is to make the digital world a safer place by staying ahead of emerging threats and continuously improving my skills.</p>
-        </section>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                Available for hire
+            </div>
+            <h1>Samuel <span class="accent">Shonde</span></h1>
+            <p class="hero-subtitle">I break apps for a living so others don't have to. Pen testing, vulnerability research, and building tools that help security researchers work faster.</p>
+            <div class="hero-actions">
+                <a href="#projects" class="btn btn-primary">View Work</a>
+                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
 
-        <!-- Areas of Expertise -->
-        <section id="expertise">
-            <h2><i class="fas fa-laptop-code"></i> Areas of Expertise</h2>
-            <ul>
-                <li><strong>Security Research</strong>: Discovered and reported vulnerabilities in Web & Mobile app programs, including fintech and healthcare applications</li>
-                <li><strong>API Security</strong>: Developed tools and techniques to secure APIs against common vulnerabilities.</li>
-                <li><strong>Web Application Penetration Testing</strong>: Conducted security assessments for web applications.</li>
-                <li><strong>Mobile Application Penetration Testing</strong>: Identified vulnerabilities in Android/iOS applications.</li>
-                <li><strong>Application Security Engineering</strong>: Implemented secure coding practices and DevSecOps pipelines.</li>
-            </ul>
-        </section>
+    <!-- About -->
+    <section class="section" id="about">
+        <div class="section-header fade-in">
+            <p class="section-label">About</p>
+            <h2 class="section-title">A bit about me.</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="about-grid">
+            <div class="about-text fade-in">
+                <p>I've spent the last 4 years doing what I enjoy most: breaking things and figuring out how they work. Started with bug bounties, moved into freelance pen testing, and now I build security tools and teach others how to do this stuff properly.</p>
+                <p>Most of my work is in application security - APIs, web apps, mobile apps. I also spend time on cloud security, AI systems, and IoT devices because that's where the interesting problems are these days. When I'm not testing, I'm usually building something or writing up a blog post about a vuln I found.</p>
+            </div>
+            <div class="about-stats fade-in">
+                <div class="stat-card">
+                    <div class="stat-number">4+</div>
+                    <div class="stat-label">Years in Cybersecurity</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <!-- Experience -->
-        <section id="experience">
-            <h2><i class="fas fa-briefcase"></i> Experience</h2>
-            <ul>
-                <li>
-                    <strong>Cybersecurity Instructor – Web Application Security [Contract]</strong> - Cloud Mavin's Cybersecurity Academy<br>
-                    <em>Aug 2024 - Till Date </em><br>
-                    - Delivering hands-on Web Application Security training students.<br>
-                    - Designed practical assessments & lab challenges to reinforce vulnerability exploitation.<br>
-                    - Guided students through secure development practices and AppSec fundamentals
-                <li>
-                    <strong>Security Research & Penetration Testing Services</strong> - Freelance<br>
-                    <em>March 2024 - Till Date</em><br>
-                    - Provided security consulting services to clients across various industries.<br>
-                    - Reported vulnerabilities like ATO, IDOR, 2FA bypass to startup organizations<br>
-                    - Conducted security audits and risk assessments.<br>
-                    - Conducted private penetration testing for fintech apps and transport API services
-                </li>
-                <li>
-                    <strong>CyberSecurity Intern [Remote] – Web Application Penetration Tester</strong> - Hacktify Cyber Security<br>
-                    <em>Jul 2024 – Aug 2024</em><br>
-                    - Conducted penetration testing on live web applications, identifying XSS, SQLi, CSRF, IDORs.<br>
-                    - Collaborated on CTF challenges and pentest reporting.
-                </li>
-            </ul>
-        </section>
+    <!-- Expertise -->
+    <section class="section" id="expertise">
+        <div class="section-header fade-in">
+            <p class="section-label">Expertise</p>
+            <h2 class="section-title">What I do.</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="expertise-grid">
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon"><i class="fas fa-search"></i></div>
+                <h3>Security Research</h3>
+                <p>Finding bugs in real-world apps through bug bounty programs. Mostly fintech and healthcare, where the stakes are high and the impact matters.</p>
+            </div>
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon"><i class="fas fa-plug"></i></div>
+                <h3>API Security</h3>
+                <p>Building and testing REST and GraphQL APIs. Built a vulnerable GraphQL API for teaching security - covers injection, broken access, auth flaws, and more.</p>
+            </div>
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon"><i class="fas fa-globe"></i></div>
+                <h3>Web App Pentesting</h3>
+                <p>Finding XSS, SQLi, CSRF, IDOR, and auth bypass issues in web apps. I've done this across a bunch of industries from finance to healthcare.</p>
+            </div>
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon"><i class="fas fa-mobile-screen-button"></i></div>
+                <h3>Mobile Security</h3>
+                <p>Android app testing - static and dynamic analysis, Frida instrumentation, checking how apps store data and handle authentication on the device.</p>
+            </div>
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon"><i class="fas fa-cloud"></i></div>
+                <h3>Cloud Security</h3>
+                <p>Testing cloud infrastructure and configurations on AWS and Azure. IAM policies, storage permissions, serverless functions - the whole cloud stack.</p>
+            </div>
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon"><i class="fas fa-brain"></i></div>
+                <h3>AI Security</h3>
+                <p>Exploring security implications of AI systems - prompt injection, model manipulation, data poisoning. It's a new field and the attack surface is wide open.</p>
+            </div>
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon"><i class="fas fa-microchip"></i></div>
+                <h3>IoT Security</h3>
+                <p>Testing embedded devices and IoT ecosystems. Firmware analysis, hardware interfaces, network traffic - figuring out how to break and secure connected devices.</p>
+            </div>
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon"><i class="fas fa-code"></i></div>
+                <h3>AppSec Engineering</h3>
+                <p>Integrating security into the development pipeline - DevSecOps, secure coding guidelines, automated scanning. Making security part of the build, not an afterthought.</p>
+            </div>
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon"><i class="fas fa-wrench"></i></div>
+                <h3>Tool Development</h3>
+                <p>Building tools I wish existed. Barrel (Android Research Workbench), Vulnera (DAST scanner), Snoop (open redirect tester), and other open-source projects.</p>
+            </div>
+        </div>
+    </section>
 
-        <!-- Projects -->
-        <section id="projects">
-            <h2><i class="fas fa-project-diagram"></i> Projects</h2>
-            <ul>
-                <li><strong>Security Research</strong>: <a href="https://dghostninja.github.io/">Vulnerability in various web programs</a></li>
-                <li><strong>API Security</strong>: <a href="https://dghostninja.github.io/posts/Vulnerable-Bank-API/">Documented and Hacked Vulnerable Bank API</a></li>
-                <li><strong>Web Application Penetration Testing</strong>: <a href="https://medium.com/@iPsalmy/open-redirect-to-xss-chaining-vulnerabilities-for-maximum-impact-36ae8dd9f198">Open Redirect to XSS: Chaining Vulnerabilities for Maximum Impact </a></li>
-                <li><strong>Mobile Application Penetration Testing</strong>: <a href="#">Insecure Data Storage in a private App Pentest</a></li>
-                <li><strong>Application Security Engineering</strong>: <a href="https://github.com/DghostNinja/Vulnera">Built a Lightweight CI/CD DAST Vulnerablity scanner</a></li>
-                <li><strong>Open Source</strong>: <a href="https://github.com/DghostNinja">Open Source labs and Penetrationg testing tool contributions</a></li>
-                <li><strong>Security Research</strong>: <a href="https://github.com/DghostNinja/Snoop">Built an Open Redirect testing tool with browser extension capability</a></li>
-            </ul>
-        </section>
+    <!-- Experience -->
+    <section class="section" id="experience">
+        <div class="section-header fade-in">
+            <p class="section-label">Experience</p>
+            <h2 class="section-title">Where I've worked.</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="timeline fade-in">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Oct 2025 - Present</div>
+                <div class="timeline-title">Application Security Tester</div>
+                <div class="timeline-company">Sterling Bank Holding HQ</div>
+                <ul class="timeline-desc">
+                    <li>Securing banking applications and APIs across the organization's digital platforms</li>
+                    <li>Conducting security assessments, code reviews, and pen testing on internal and customer-facing apps</li>
+                    <li>Working with dev teams to fix vulnerabilities and improve security practices in the SDLC</li>
+                </ul>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Aug 2024 - Present</div>
+                <div class="timeline-title">Cybersecurity Instructor - Web Application Security</div>
+                <div class="timeline-company">Cloud Mavin's Cybersecurity Academy · Contract</div>
+                <ul class="timeline-desc">
+                    <li>Delivering hands-on Web Application Security training to students</li>
+                    <li>Designed practical assessments and lab challenges to reinforce vulnerability exploitation</li>
+                    <li>Guided students through secure development practices and AppSec fundamentals</li>
+                </ul>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Mar 2024 - Present</div>
+                <div class="timeline-title">Security Research & Penetration Testing</div>
+                <div class="timeline-company">Freelance</div>
+                <ul class="timeline-desc">
+                    <li>Provided security consulting services across fintech, healthcare, and transport industries</li>
+                    <li>Reported critical vulnerabilities including ATO, IDOR, and 2FA bypass to organizations</li>
+                    <li>Conducted private penetration testing for fintech apps and transport API services</li>
+                </ul>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Jul 2024 - Aug 2024</div>
+                <div class="timeline-title">Web Application Penetration Tester</div>
+                <div class="timeline-company">Hacktify Cyber Security · Remote Internship</div>
+                <ul class="timeline-desc">
+                    <li>Conducted penetration testing on live web applications, identifying XSS, SQLi, CSRF, and IDOR vulnerabilities</li>
+                    <li>Collaborated on CTF challenges and contributed to comprehensive pentest reports</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-        <!-- Certifications -->
-        <section id="certifications">
-            <h2><i class="fas fa-certificate"></i> Certifications</h2>
-            <ul>
-                <li><strong>Certified Application Security Practitioner (CAP)</strong>: <a href="#">View Certificate</a></li>
-                <li><strong>API Penetration Tester</strong>: <a href="https://www.credly.com/badges/e036ed21-9f0c-49f6-8788-94d535e247c6/public_url">View Certificate</a></li>
-                <li><strong>Information Security Management System (ISO/IEC 27001)</strong>: <a href="#">View Certificate</a></li>
-            </ul>
-        </section>
+    <!-- Projects -->
+    <section class="section" id="projects">
+        <div class="section-header fade-in">
+            <p class="section-label">Projects</p>
+            <h2 class="section-title">Selected work.</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="projects-grid">
+            <!-- Barrel -->
+            <div class="project-card featured fade-in">
+                <div>
+                    <span class="project-tag tool">Commercial Tool</span>
+                    <h3 class="project-title">Barrel - Android Research Workbench</h3>
+                    <p class="project-desc">Desktop app for Android security research. Shell, logcat, file explorer, Frida, APK analysis, network inspection, SQLite browser, and a plugin SDK. Free tier available with paid plans for advanced features like unlimited plugins and remote device access.</p>
+                    <div class="project-tech">
+                        <span>Tauri</span>
+                        <span>Rust</span>
+                        <span>JavaScript</span>
+                        <span>ADB</span>
+                        <span>Frida</span>
+                        <span>SQLite</span>
+                    </div>
+                </div>
+                <div class="project-links">
+                    <a href="https://barrelhq.org/" target="_blank" class="project-link"><i class="fas fa-arrow-up-right-from-square"></i> Website</a>
+                    <a href="https://barrelhq.org/docs" target="_blank" class="project-link"><i class="fas fa-book"></i> Documentation</a>
+                    <a href="https://github.com/DghostNinja/barrel-releases" target="_blank" class="project-link"><i class="fab fa-github"></i> Source Code</a>
+                </div>
+            </div>
 
-        <!-- Contact -->
-        <section id="contact">
-            <h2><i class="fas fa-envelope"></i> Contact</h2>
-            <p>Feel free to reach out to me for collaborations, bug bounty programs, or security consultations:</p>
-            <ul>
-               
-                <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/shonde-samuel" target="_blank">Samuel Shonde</a></li>
-                <li><strong>Twitter:</strong> <a href="https://x.com/Dghost_Ninja" target="_blank">@Dghost_Ninja</a></li>
-            </ul>
-        </section>
-    </div>
+            <!-- GraphQL Bookstore API -->
+            <div class="project-card featured fade-in">
+                <div>
+                    <span class="project-tag api">API / Security Education</span>
+                    <h3 class="project-title">GraphQL Bookstore API</h3>
+                    <p class="project-desc">A GraphQL API with intentional vulnerabilities for learning security. Built with C++17 and PostgreSQL - covers injection, broken access control, misconfigurations, and 7 vuln categories. Comes with a Docker setup and an MCP server for AI integration.</p>
+                    <div class="project-tech">
+                        <span>C++17</span>
+                        <span>PostgreSQL</span>
+                        <span>GraphQL</span>
+                        <span>JWT</span>
+                        <span>Docker</span>
+                        <span>MCP</span>
+                    </div>
+                </div>
+                <div class="project-links">
+                    <a href="https://api.graphqlbook.org/" target="_blank" class="project-link"><i class="fas fa-arrow-up-right-from-square"></i> Live API</a>
+                    <a href="https://api.graphqlbook.org/graphql" target="_blank" class="project-link"><i class="fas fa-terminal"></i> GraphQL Endpoint</a>
+                    <a href="https://github.com/DghostNinja/graphql-bookstore-API" target="_blank" class="project-link"><i class="fab fa-github"></i> Source Code</a>
+                </div>
+            </div>
+
+            <!-- SAST Report Generator -->
+            <div class="project-card fade-in">
+                <div>
+                    <span class="project-tag">Security Tool</span>
+                    <h3 class="project-title">SAST Report Generator</h3>
+                    <p class="project-desc">A web app that generates static analysis security reports. Feed it your code or scan results and get a clean, structured report you can actually use.</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>SAST</span>
+                        <span>Security Reporting</span>
+                    </div>
+                </div>
+                <div class="project-links">
+                    <a href="https://sast-report-generator.onrender.com/" target="_blank" class="project-link"><i class="fas fa-arrow-up-right-from-square"></i> Live App</a>
+                </div>
+            </div>
+
+            <!-- grAPI -->
+            <div class="project-card fade-in">
+                <div>
+                    <span class="project-tag">Security Tool</span>
+                    <h3 class="project-title">grAPI - Live API Discovery Tool</h3>
+                    <p class="project-desc">Discover hidden API endpoints on any website by browsing it in a real browser. Captures XHR/Fetch calls and scans JS files for hardcoded paths. Exports to txt, JSON, or Postman collection. Available on PyPI as <code>grapix</code>.</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>Playwright</span>
+                        <span>API Security</span>
+                        <span>PyPI</span>
+                    </div>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/DghostNinja/grAPI" target="_blank" class="project-link"><i class="fab fa-github"></i> Source Code</a>
+                    <a href="https://pypi.org/project/grapix/" target="_blank" class="project-link"><i class="fas fa-arrow-up-right-from-square"></i> PyPI</a>
+                </div>
+            </div>
+
+            <!-- Vulnera -->
+            <div class="project-card fade-in">
+                <div>
+                    <span class="project-tag">Security Tool</span>
+                    <h3 class="project-title">Vulnera - CI/CD DAST Scanner</h3>
+                    <p class="project-desc">A DAST scanner that fits into CI/CD pipelines. Runs automated security checks on web apps during builds.</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>DAST</span>
+                        <span>CI/CD</span>
+                        <span>DevSecOps</span>
+                    </div>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/DghostNinja/Vulnera" target="_blank" class="project-link"><i class="fab fa-github"></i> Source Code</a>
+                </div>
+            </div>
+
+            <!-- Snoop -->
+            <div class="project-card fade-in">
+                <div>
+                    <span class="project-tag research">Security Tool</span>
+                    <h3 class="project-title">Snoop - Open Redirect Testing Tool</h3>
+                    <p class="project-desc">Tests for open redirect vulnerabilities with a browser extension for quick, hands-on testing.</p>
+                    <div class="project-tech">
+                        <span>JavaScript</span>
+                        <span>Browser Extension</span>
+                        <span>OWASP</span>
+                    </div>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/DghostNinja/Snoop" target="_blank" class="project-link"><i class="fab fa-github"></i> Source Code</a>
+                </div>
+            </div>
+
+            <!-- Research & Writeups -->
+            <div class="project-card fade-in">
+                <div>
+                    <span class="project-tag research">Security Research</span>
+                    <h3 class="project-title">Vulnerability Research & Writeups</h3>
+                    <p class="project-desc">Blog posts about vulns I've found and techniques I've used. Covers web security, API flaws, mobile bypasses, CI/CD hardening, and OWASP top 10 breakdowns.</p>
+                    <div class="project-tech">
+                        <span>Bug Bounty</span>
+                        <span>XSS</span>
+                        <span>API Security</span>
+                        <span>OWASP</span>
+                        <span>Mobile</span>
+                        <span>CI/CD</span>
+                    </div>
+                </div>
+                <div class="project-links">
+                    <a href="https://dghostninja.github.io/" target="_blank" class="project-link"><i class="fas fa-arrow-up-right-from-square"></i> Blog</a>
+                    <a href="https://dghostninja.github.io/posts/Response-Manipulation/" target="_blank" class="project-link"><i class="fas fa-file-lines"></i> Response Manipulation → Auth Bypass</a>
+                    <a href="https://dghostninja.github.io/posts/CI-CD/" target="_blank" class="project-link"><i class="fas fa-file-lines"></i> Building a Secure CI/CD Pipeline</a>
+                    <a href="https://dghostninja.github.io/posts/Bypass-root/" target="_blank" class="project-link"><i class="fas fa-file-lines"></i> Bypassing Root & Emulator Detection</a>
+                    <a href="https://dghostninja.github.io/posts/Vulnerable-Bank-API/" target="_blank" class="project-link"><i class="fas fa-file-lines"></i> Hacking a Vulnerable Bank API</a>
+                    <a href="https://dghostninja.github.io/posts/exploiting-csrf-and-otp-reuse-how-weak-token-management-enables-password-reset-attacks-leading-to-c2f6b914f398/" target="_blank" class="project-link"><i class="fas fa-file-lines"></i> CSRF + OTP Reuse → Account Takeover</a>
+                    <a href="https://medium.com/@iPsalmy/open-redirect-to-xss-chaining-vulnerabilities-for-maximum-impact-36ae8dd9f198" target="_blank" class="project-link"><i class="fas fa-file-lines"></i> Open Redirect to XSS Chain</a>
+                </div>
+            </div>
+
+            <!-- Open Source -->
+            <div class="project-card fade-in">
+                <div>
+                    <span class="project-tag">Open Source</span>
+                    <h3 class="project-title">Open Source Contributions</h3>
+                    <p class="project-desc">Security labs, pen testing tools, and resources I've shared on GitHub. Includes vulnerable-by-design apps for practicing exploitation.</p>
+                    <div class="project-tech">
+                        <span>GitHub</span>
+                        <span>Security Labs</span>
+                        <span>Community</span>
+                    </div>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/DghostNinja" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub Profile</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="section" id="certifications">
+        <div class="section-header fade-in">
+            <p class="section-label">Certifications</p>
+            <h2 class="section-title">Credentials.</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="certs-grid fade-in">
+            <div class="cert-card">
+                <div class="cert-icon"><i class="fas fa-shield-halved"></i></div>
+                <div class="cert-info">
+                    <h3>Certified Application Security Practitioner (CAP)</h3>
+                    <a href="asset/img/CAP.jpg" target="_blank">View Certificate →</a>
+                </div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon"><i class="fas fa-mobile-screen-button"></i></div>
+                <div class="cert-info">
+                    <h3>CMPen-Android | Android Pentesting Cert</h3>
+                    <a href="asset/img/CMPEN-Andriod.jpg" target="_blank">View Certificate →</a>
+                </div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon"><i class="fas fa-bug"></i></div>
+                <div class="cert-info">
+                    <h3>API Penetration Tester</h3>
+                    <a href="https://www.credly.com/badges/e036ed21-9f0c-49f6-8788-94d535e247c6/public_url" target="_blank">View Certificate →</a>
+                </div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon"><i class="fas fa-file-shield"></i></div>
+                <div class="cert-info">
+                    <h3>ISO/IEC 27001 - Information Security Management</h3>
+                    <a href="#">View Certificate →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+        <div class="section-header fade-in">
+            <p class="section-label">Contact</p>
+            <h2 class="section-title">Get in touch.</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="contact-content fade-in">
+            <p>Looking for security consulting, pen testing, or full-time roles in appsec. Also open to interesting projects and collaborations.</p>
+            <div class="contact-links">
+                <a href="https://www.linkedin.com/in/shonde-samuel" target="_blank" class="contact-link">
+                    <i class="fab fa-linkedin-in"></i>
+                    LinkedIn - Samuel Shonde
+                </a>
+                <a href="https://x.com/Dghost_Ninja" target="_blank" class="contact-link">
+                    <i class="fab fa-x-twitter"></i>
+                    X (Twitter) - @Dghost_Ninja
+                </a>
+                <a href="https://github.com/DghostNinja" target="_blank" class="contact-link">
+                    <i class="fab fa-github"></i>
+                    GitHub - DghostNinja
+                </a>
+                <a href="https://www.youtube.com/@iPsalmy" target="_blank" class="contact-link">
+                    <i class="fab fa-youtube"></i>
+                    YouTube - iPsalmy
+                </a>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
-        <div class="social-links">
-            <a href="https://github.com/DghostNinja" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/shonde-samuel" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://x.com/Dghost_Ninja" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.youtube.com/@iPsalmy" target="_blank"><i class="fab fa-youtube"></i></a>
+        <div class="footer-inner">
+            <div class="footer-socials">
+                <a href="https://github.com/DghostNinja" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/shonde-samuel" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://x.com/Dghost_Ninja" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.youtube.com/@iPsalmy" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="footer-copy">&copy; 2025 Samuel Shonde. All rights reserved.</p>
         </div>
-        <p>&copy; 2025 IPSALMY. All rights reserved.</p>
     </footer>
 
-    <!-- Floating Contact Button -->
-    <button class="floating-contact-button" onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });">
-        Contact Me
-    </button>
-
-    <!-- Theme Toggle Button -->
-    <button id="theme-toggle" class="theme-toggle">
-        <i class="fas fa-moon"></i>
-    </button>
-
-    <!-- JavaScript for Theme Toggle and Side Pane -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const themeToggle = document.getElementById('theme-toggle');
-            const body = document.body;
-            const sidePane = document.getElementById('sidePane');
-
-            themeToggle.addEventListener('click', () => {
-                body.classList.toggle('light-mode');
-                themeToggle.innerHTML = body.classList.contains('light-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-            });
-
-            window.toggleSidePane = function() {
-                sidePane.classList.toggle('open');
-            };
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 40);
         });
+
+        // Mobile nav
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavClose = document.getElementById('mobileNavClose');
+
+        hamburgerBtn.addEventListener('click', () => mobileNav.classList.add('open'));
+        mobileNavClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileNav.classList.remove('open'));
+        });
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
